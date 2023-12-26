@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  server:
+    build:
+      context: ..
+      dockerfile: ./build/DockerFile
+      args:
+        - APP_PATH=./cmd/server
+    ports:
+      - '8080:8080'
+    image: mbasalai/prof_of_work/server:local
+
+  client:
+    build:
+      context: ..
+      dockerfile: ./build/DockerFile
+      args:
+        - APP_PATH=./cmd/client
+    image: mbasalai/prof_of_work/client:local
+    depends_on:
+      - server
